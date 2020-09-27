@@ -28,6 +28,9 @@ class Form extends Component<Props, State> {
       soDienThoai: "0987988620",
       tieuDeDangBai: "Homestay Nữ Quận Tân Bình. Giảm thêm 500k tháng đầu.",
       noiDungMoTa: "hehe",
+      thoiGianMoCua : '6h00',
+      thoiGianDongCua : '22h00',
+      
     };
   }
 
@@ -119,7 +122,7 @@ class Form extends Component<Props, State> {
             <span className="fs-20 text-secondary">Sức chứa</span>
           </div>
           <input
-            onClick={this.onClickReset}
+            // onClick={this.onClickReset}
             onChange={(event) => {
               this.setState({
                 sucChua: event.target.valueAsNumber,
@@ -378,6 +381,11 @@ class Form extends Component<Props, State> {
                   <span className="fs-16">Số điện thoại</span>
                 </div>
                 <input
+                  onChange = {(event) => {
+                    this.setState({
+                      soDienThoai : '',
+                    })
+                  }}
                   type="number"
                   placeholder="Nhập số điện thoại"
                   id="soDienThoai"
@@ -387,36 +395,51 @@ class Form extends Component<Props, State> {
                 <div className="tt">
                   <span className="fs-16">Tiêu đề đăng bài</span>
                 </div>
-                <input type="text" placeholder="Nhập tên phòng" id="tieuDe" />
+                <input 
+                onChange = {(event) => {
+                  this.setState({
+                    tieuDeDangBai : ''
+                  })
+                }}
+                type="text" placeholder="Nhập tên phòng" id="tieuDe" />
               </div>
               <div className="ttXacNhan">
                 <div className="tt">
                   <span className="fs-16">Nội dung mô tả</span>
                 </div>
                 <input
+                onChange = {(event) => {
+                  this.setState({
+                    noiDungMoTa : ''
+                  })
+                }}
                   type="text"
                   placeholder="Môi trường sống sạch , khu phố an ninh..."
                   id="noiDungMoTa"
+                  value = {this.state.noiDungMoTa}
                 />
               </div>
               <div className="ttXacNhan">
                 <div className="tt">
                   <span className="fs-16">Thời gian mở cửa</span>
                 </div>
-                <input type="text" placeholder="Giờ mở cửa" id="openWindow" />
+                <input value = {this.state.thoiGianMoCua} type="text" placeholder="Giờ mở cửa" id="openWindow" />
               </div>
               <div className="ttXacNhan">
                 <div className="tt">
                   <span className="fs-16">Thời gian gian đóng cửa</span>
                 </div>
-                <input type="text" placeholder="Giờ đóng cửa" id="closeOpen" />
+                <input value = {this.state.thoiGianDongCua} type="text" placeholder="Giờ đóng cửa" id="closeOpen" />
               </div>
             </div>
           </div>
           <div id="dangPhong">
-            <div className="btn btn-large btn-primary rounded">
+            <div
+              onClick={this.onClickDangPhong}
+              className="btn btn-large btn-primary rounded"
+            >
               <i className="fas fa-home" />
-              <span onClick={this.onClickDangPhong} className="fs-16 fw-400">
+              <span className="fs-16 fw-400">
                 Đăng Phòng
               </span>
             </div>
@@ -436,6 +459,18 @@ class Form extends Component<Props, State> {
   onClickDangPhong = () => {
     this.setState({
       soLuongPhong: 0,
+      sucChua: 0,
+      dienTich : 0 ,
+      giaChoThue : 0 ,
+      datCoc : 0 ,
+      tienDien : 0,
+      tenDuong : '',
+      soNha : '',
+      hinhAnh : ['','','',''],
+      noiDungMoTa : '',
+      thoiGianMoCua : '',
+      thoiGianDongCua : '',
+
     });
 
     console.log("Hiêm");
@@ -462,7 +497,8 @@ type State = {
     soDienThoai : string,
     tieuDeDangBai : string,
     noiDungMoTa : string ,
-    
+    thoiGianMoCua : string,
+    thoiGianDongCua : string,
 
 
 
