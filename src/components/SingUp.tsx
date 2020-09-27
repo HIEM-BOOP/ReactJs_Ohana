@@ -41,13 +41,14 @@ class SingUp extends Component<Props, State> {
       </div>
     );
   }
-  handleChange = (newUsername: string) => {
-      this.setState({
-          username : newUsername,
-      })
+  // handleChange = (newUsername: string) => {
+  //     this.setState({
+  //         username : newUsername,
+  //     })
       
-  } 
+  // } 
 
+  
   onClickSingUp = () => {
     this.setState({
       username: "",

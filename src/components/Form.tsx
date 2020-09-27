@@ -1,8 +1,36 @@
+import { yellow } from "@material-ui/core/colors";
 import React, { Component } from "react";
-import Utilities from "./Utilities";
-import UtilityRoom from "./UtilityRoom";
 
-class Form extends Component {
+class Form extends Component<Props, State> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      loaiPhong: "",
+      soLuongPhong: 0,
+      sucChua: 0,
+      gioiTinh: "",
+      dienTich: 30,
+      giaChoThue: 1400,
+      datCoc: 500,
+      tienDien: 100,
+      thanhPho: "Buôn Ma Thuột",
+      quan: "Krong pak",
+      phuong: "Hoa dong",
+      tenDuong: "Trần Văn Đồng",
+      soNha: "99 Buôn ta ra",
+      hinhAnh: [
+        "https://bayleaf.s3.amazonaws.com/property-images%2F1599662865856_IMG_9403.JPG",
+        "https://bayleaf.s3.amazonaws.com/property-images%2F1599662865857_IMG_9397.JPG",
+        "https://bayleaf.s3.amazonaws.com/property-images%2F1599662865857_IMG_9405.JPG",
+        "https://bayleaf.s3.amazonaws.com/property-images%2F1579699300127_IMG_20200122_201942.jpg",
+      ],
+      tienIch: ["Tủ Lạnh"],
+      soDienThoai: "0987988620",
+      tieuDeDangBai: "Homestay Nữ Quận Tân Bình. Giảm thêm 500k tháng đầu.",
+      noiDungMoTa: "hehe",
+    };
+  }
+
   render() {
     return (
       <div className="upRoom">
@@ -76,14 +104,28 @@ class Form extends Component {
             <span className="fs-20 text-secondary">Số lượng phòng</span>
           </div>
           <input
+            onClick={this.onClickReset}
             type="number"
             id="soLuongPhong"
+            onChange={(event) => {
+              this.setState({
+                soLuongPhong: event.target.valueAsNumber,
+              });
+            }}
+            value={this.state.soLuongPhong}
             placeholder="Nhập số lượng bạn đang quản lý"
           />
           <div className="sucChua">
             <span className="fs-20 text-secondary">Sức chứa</span>
           </div>
           <input
+            onClick={this.onClickReset}
+            onChange={(event) => {
+              this.setState({
+                sucChua: event.target.valueAsNumber,
+              });
+            }}
+            value={this.state.sucChua}
             type="number"
             id="sucChua"
             placeholder="Nhập số lượng sức chứa"
@@ -109,6 +151,7 @@ class Form extends Component {
             </div>
             <div className="tt">
               <input
+                value={this.state.dienTich}
                 type="text"
                 name="dienTich"
                 id="dienTich"
@@ -122,6 +165,7 @@ class Form extends Component {
               <div className="giaChoThue">
                 <span className="fs-16 ">Gía cho thuê</span>
                 <input
+                  value={this.state.giaChoThue}
                   type="number"
                   id="giaChoThue"
                   placeholder="Nhập giá cho thuê"
@@ -130,6 +174,7 @@ class Form extends Component {
               <div className="datCoc">
                 <span className="fs-16 ">Đặt cọc</span>
                 <input
+                  value={this.state.datCoc}
                   type="number"
                   id="datCoc"
                   placeholder="Nhập số tháng hoặc số tiền"
@@ -141,6 +186,7 @@ class Form extends Component {
                 </div>
                 <div className="ipTienDien">
                   <input
+                    value={this.state.tienDien}
                     type="number"
                     id="tienDien"
                     placeholder="Nhập số tiền"
@@ -192,11 +238,21 @@ class Form extends Component {
 
             <div className="tenDuong">
               <span className="fs-16">Tên đường</span>
-              <input typeof="text" id="tenDuong" placeholder="Tên đường" />
+              <input
+                value={this.state.tenDuong}
+                typeof="text"
+                id="tenDuong"
+                placeholder="Tên đường"
+              />
             </div>
             <div className="soNha">
               <span className="fs-16">Số nhà</span>
-              <input typeof="text" id="soNha" placeholder="Số nhà" />
+              <input
+                value={this.state.soNha}
+                typeof="text"
+                id="soNha"
+                placeholder="Số nhà"
+              />
             </div>
           </div>
 
@@ -207,21 +263,25 @@ class Form extends Component {
               </span>
               <div className="hinhAnhPhong">
                 <input
+                  value={this.state.hinhAnh[0]}
                   type="text"
                   id="hinhAnhPhong1"
                   placeholder="Hình ảnh thứ nhất"
                 />
                 <input
+                  value={this.state.hinhAnh[1]}
                   type="text"
                   id="hinhAnhPhong2"
                   placeholder="Hình ảnh thứ hai"
                 />
                 <input
+                  value={this.state.hinhAnh[2]}
                   type="text"
                   id="hinhAnhPhong3"
                   placeholder="Hình ảnh thứ ba"
                 />
                 <input
+                  value={this.state.hinhAnh[3]}
                   type="text"
                   id="hinhAnhPhong4"
                   placeholder="Hình ảnh thứ tư"
@@ -356,13 +416,55 @@ class Form extends Component {
           <div id="dangPhong">
             <div className="btn btn-large btn-primary rounded">
               <i className="fas fa-home" />
-              <span className="fs-16 fw-400">Đăng Phòng</span>
+              <span onClick={this.onClickDangPhong} className="fs-16 fw-400">
+                Đăng Phòng
+              </span>
             </div>
           </div>
         </form>
       </div>
     );
   }
+
+  onClickReset = () => {
+    this.setState({
+      soLuongPhong: JSON.parse(JSON.stringify([undefined])),
+      sucChua: JSON.parse(JSON.stringify([undefined])),
+    });
+  } 
+
+  onClickDangPhong = () => {
+    this.setState({
+      soLuongPhong: 0,
+    });
+
+    console.log("Hiêm");
+  };
 }
 
+type Props ={};
+type State = {
+    loaiPhong : string,
+    soLuongPhong: number,
+    sucChua: number,
+    gioiTinh : string,
+    dienTich : number,
+    giaChoThue : number,
+    datCoc : number,
+    tienDien : number ,
+    thanhPho : string,
+    quan : string ,
+    phuong : string ,
+    tenDuong : string ,
+    soNha : string ,
+    hinhAnh : string[],
+    tienIch : string[],
+    soDienThoai : string,
+    tieuDeDangBai : string,
+    noiDungMoTa : string ,
+    
+
+
+
+}
 export default Form;
