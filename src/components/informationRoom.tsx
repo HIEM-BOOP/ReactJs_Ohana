@@ -1,7 +1,21 @@
+import { type } from 'os';
 import React, { Component } from 'react';
 
-class informationRoom extends Component {
-
+class informationRoom extends Component<Props,State> {
+  constructor(props : any) {
+    super(props);
+    this.state = {
+  gia : '10' ,
+  dienTich : 0 ,
+  datCoc : 0 ,
+  sucChua : 0,
+  dien : '',
+  nuoc : '',
+  wifi : 0,
+  tinhTrang : '',
+  diaChi : '',
+    }
+  }
     render() {
         return (
           <div className="thongTinPhong">
@@ -18,7 +32,7 @@ class informationRoom extends Component {
                 <div className="detail">
                   <div className="tt">
                     <p className="fs-16">Giá</p>
-                    <p className="fs-16">2,6000,000</p>
+        <p className="fs-16">{this.state.gia}</p>
                   </div>
                 </div>
                 <div className="detail">
@@ -291,5 +305,16 @@ class informationRoom extends Component {
         );
     }
 }
-
+type Props = {};
+type State = {
+  gia : string ;
+  dienTich : number ;
+  datCoc : number ;
+  sucChua : number ;
+  dien : string;
+  nuoc : string;
+  wifi : number;
+  tinhTrang : string;
+  diaChi : string;
+}
 export default informationRoom;

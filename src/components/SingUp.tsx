@@ -34,7 +34,7 @@ class SingUp extends Component<Props, State> {
                 })
             }}     
         value={this.state.password} type="password" name="password" />
-        <button onClick={this.onClickSingUp}>Đắng ký</button>
+        <button onClick={(event) => {this.onClickSingUp()}}>Đắng ký</button>
 
         <p>Tài khoản của bạn là : {this.state.username}</p>
         <p>Mật khẩu của bạn là : {this.state.password}</p>

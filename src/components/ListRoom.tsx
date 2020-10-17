@@ -1,48 +1,16 @@
+
 import React, { Component } from "react";
 import RoomItem from "./RoomItem";
 
 class ListRoom extends Component {
   render() {
-    let danhSachRoom = [
-      {
-        name: "Miễn Phí tiền phòng",
-        gender: ["Nam và Nữ"],
-        acreage: 5,
-        address: "Buôn Ma Thuột",
-        kingOfRoom: "Phòng cho thuê",
-        price: 14000000,
-        hinhAnh:
-          "https://bayleaf.s3.amazonaws.com/property-images%2F1600400744667_IMG_7317.HEIC",
-      },
-      {
-        name: "Tất cả tiền chủ trọ bao phòng",
-        gender: ["Nam và Nữ"],
-        acreage: 5,
-        address: "Nha Trang",
-        kingOfRoom: "Phòng cho thuê",
-        price: 14000000,
-        hinhAnh:
-          "https://bayleaf.s3.amazonaws.com/property-images%2F1600859287617_IMG_3838.HEIC",
-      },
-      {
-        name: "Giá cao hết mức có thể",
-        gender: ["Nam và Nữ"],
-        acreage: 5,
-        address: "Sài Gòn",
-        kingOfRoom: "Phòng cho thuê",
-        price: 14000000,
-        hinhAnh:
-          "https://bayleaf.s3.amazonaws.com/property-images%2F1598055910367_IMG_1594126506946_1598055796334.jpg",
-      },
-    ];
-    localStorage.setItem("danhSachPhong", JSON.stringify(danhSachRoom));
-    // localStorage.getItem('danhSachPhong');
 
-    let data = localStorage.getItem("danhSachPhong");
-    let dsphong = [];
-    if (data != null) {
-      dsphong = JSON.parse(data);
-    }
+
+    var data = localStorage.getItem("dsPhong");
+    
+   
+      var dsphong = JSON.parse(data || '{}');
+    
     console.log(dsphong);
 
     return (
@@ -53,13 +21,27 @@ class ListRoom extends Component {
         {dsphong.map((item: any) => {
           return (
             <RoomItem
-              roomName={item.name}
-              diaChi={item.address}
-              gia={item.acreage}
-              kichThuoc={item.acreage}
-              loaiPhong={item.kingOfRoom}
-              hinhAnh={item.hinhAnh}
-              gioiTinh={item.gender}
+              tieuDeDangBai={item.tieuDeDangBai}
+              soNha={item.soNha}
+              giaChoThue={item.giaChoThue}
+              dienTich={item.dienTich}
+              loaiPhong={item.loaiPhong}
+              hinhAnhs={item.hinhAnh}
+              gioiTinh={item.gioiTinh}
+              datCoc={item.datCoc}
+              free={item.free}
+              noiDungMoTa={item.noiDungMoTa}
+              phuong={item.phuong}
+              quan={item.quan}
+              soDienThoai={item.soDienThoai}
+              soLuongPhong={item.soDienThoai}
+              sucChua={item.sucChua}
+              tenDuong={item.tenDuong}
+              thanhPho={item.thanhPho}
+              thoiGianDongCua={item.thoiGianDongCua}
+              thoiGianMoCua={item.thoiGianMoCua}
+              tienDien={item.tienDien}
+              tienIchs={item.tienIchs}
             ></RoomItem>
           );
         })}

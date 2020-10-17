@@ -1,55 +1,31 @@
+import { type } from 'os';
 import React, { Component } from 'react';
 
-class picture extends Component {
+class picture extends Component <Props,State> {
 
     render() {
-        return (
+      console.log(this.props.hinhAnhs);
+      return (
           <div className="picture">
             <div id="images">
-              <div
-                style={{
-                  background:
-                    'url("https://bayleaf.s3.ap-southeast-1.amazonaws.com/property-images/1599796984882.jpg") no-repeat center center/cover',
-                }}
-                id="image"
-              ></div>
-              <div
-                style={{
-                  background:
-                    'url("https://bayleaf.s3.ap-southeast-1.amazonaws.com/property-images/1599796984882.jpg") no-repeat center center/cover',
-                }}
-                id="image"
-              ></div>
-
-              <div
-                style={{
-                  background:
-                    'url("https://bayleaf.s3.ap-southeast-1.amazonaws.com/property-images/1599796984882.jpg") no-repeat center center/cover',
-                }}
-                id="image"
-              ></div>
-
-              <div
-                style={{
-                  background:
-                    'url("https://bayleaf.s3.ap-southeast-1.amazonaws.com/property-images/1599796984882.jpg") no-repeat center center/cover',
-                }}
-                id="image"
-              ></div>
-
-              <div
-                style={{
-                  background:
-                    'url("https://bayleaf.s3.ap-southeast-1.amazonaws.com/property-images/1599796984882.jpg") no-repeat center center/cover',
-                }}
-                id="image"
-              ></div>
+              {this.props.hinhAnhs.map((item) => {
+                return (
+                  <div
+                    style={{
+                      background:
+                        `url(${item.link}) no-repeat center center/cover`,
+                    }}
+                    id="image"
+                  ></div>
+                );
+              })}
+             
             </div>
             <div className="khungThongTinTenAnh">
               <div className="tenAnh">
                 <div id="title1" style={{ width: "800px" }}>
                   <h1 itemProp="name" className="Vg-MA fs-32 mb-6">
-                    Căn hộ full nội thất, Ban công, được nuôi thú cưng, Rất sang
+                    {this.props.tieuDeDangBai}
                   </h1>
                 </div>
                 <div className="title2">
@@ -63,6 +39,20 @@ class picture extends Component {
           </div>
         );
     }
+
+
 }
+type State = {
+}
+type hinhAnh = {
+  name: string;
+  link: string;
+  placeholder: string;
+};
+
+type Props = {
+  hinhAnhs: hinhAnh[];
+  tieuDeDangBai : string;
+};
 
 export default picture;
