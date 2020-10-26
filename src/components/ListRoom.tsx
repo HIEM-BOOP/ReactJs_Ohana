@@ -1,24 +1,92 @@
-
 import React, { Component } from "react";
 import RoomItem from "./RoomItem";
 
-class ListRoom extends Component {
-  render() {
-
-
+class ListRoom extends Component<{}, State> {
+  constructor(props: any) {
+    super(props);
     var data = localStorage.getItem("dsPhong");
-    
-   
-      var dsphong = JSON.parse(data || '{}');
-    
-    console.log(dsphong);
-
+    var dsphong = JSON.parse(data || "{}");
+    this.state = { rooms: dsphong, search: "" };
+  }
+  render() {
     return (
       <div className="listRoom">
         <div className="ketQua">
           <span className="fs-26">Kết quả</span>
         </div>
-        {dsphong.map((item: any) => {
+        <div className="menu">
+          <div className="canGiua">
+            <div className="hf_center">
+              <div className="hr_left ">
+                <div className="item">
+                  <i className="fas fa-home text-white"></i>
+                  <span>Đăng phòng dễ dàng</span>
+                </div>
+
+                <div className="item">
+                  <i className="fas fa-download"></i>
+                  <span>Tải APP</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Tìm kiếm và logo */}
+          <div className="hf_below">
+            <div className="hf_center">
+              <div className="hf_LgSh">
+                <div id="search">
+                  <i className="fas fa-map-marker-alt"></i>
+                  <select name="tinhThanh" id="tinhThanh">
+                    <option value="TP.HCM">TP.HCM</option>
+                    <option value="TP Hà Nội">TP Hà Nội</option>
+                  </select>
+
+                  <input
+                    type="text"
+                    className="timKiem fs-16 fm-400"
+                    id="timKiem"
+                    placeholder="Tìm Kiếm theo địa điểm, quận,tên đường..."
+                    value={this.state.search}
+                    onChange={(event) => {
+                      this.setState({
+                        search: event.target.value,
+                      });
+
+                      console.log(event.target.value);
+                      // Tạo mảng rỗng
+                      let danhSachTimKiem = [];
+                      let tatCaRooms = localStorage.getItem("dsPhong");
+                       var dsphong = JSON.parse(tatCaRooms || "{}");
+                      // Chạy vòng lặp , rooms là dsphong mà dsphong là lấy từ local và đc gắn cho rooms : dsphong
+                      for (var i = 0; i < dsphong.length; i++) {
+                        // Tạo điều kiện nếu trong tất cả các danh sách phòng có cùng tiêu đề với người dùng thao tác nhập thì push vào mảng danhSachTimKiem , mà includes chỉ trả giá trị true or fasle nên ta phải set đk là == true
+
+                        if (
+                          dsphong[i].tieuDeDangBai.includes(
+                            this.state.search
+                          ) === true
+                        ) {
+                          danhSachTimKiem.push(dsphong[i]);
+                          console.log(danhSachTimKiem);
+                        } 
+                        
+                      }
+                      // cập nhật lại state phần roons .rooms là tất cả các danh sách phòng lúc đầu rooms : dsphong và hiện tại setState lại thành rooms : danhSachTimKiem , mà dach sách tìm kiếm này chứa thông tin tiêu đề mà người dùng tìm
+                      this.setState({
+                        rooms: danhSachTimKiem,
+                      });
+                    }}
+                  />
+
+                  <button>
+                    <i className="  fas fa-search-location"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {this.state.rooms.map((item: any) => {
           return (
             <RoomItem
               tieuDeDangBai={item.tieuDeDangBai}
@@ -45,21 +113,14 @@ class ListRoom extends Component {
             ></RoomItem>
           );
         })}
-
-        {/* <RoomItem
-              roomName={"Ban Nha"}
-              diaChi={"Buon Me Thuot"}
-              gia={50}
-              gioiTinh={["Nam"]}
-              kichThuoc={60}
-              loaiPhong={"Phòng cho thuê"}
-              hinhAnh={
-                "https://scontent.fdad3-1.fna.fbcdn.net/v/t1.0-9/119841670_4471040589634628_6380201682574851778_o.jpg?_nc_cat=106&_nc_sid=110474&_nc_ohc=iV8u4jFN5OIAX8Jx3KE&_nc_ht=scontent.fdad3-1.fna&oh=b2941535acd449a646955cdb20c4e4ec&oe=5F8C9A4E"
-              }
-            ></RoomItem> */}
       </div>
     );
   }
 }
+
+type State = {
+  rooms: any[];
+  search: string;
+};
 
 export default ListRoom;

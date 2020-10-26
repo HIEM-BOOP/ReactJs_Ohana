@@ -53,6 +53,6 @@ type hinhAnh = {
 type Props = {
   hinhAnhs: hinhAnh[];
   tieuDeDangBai : string;
-};
+};    
 
 export default picture;

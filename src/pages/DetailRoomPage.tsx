@@ -3,7 +3,8 @@ import Menu from "../components/Menu";
 import Picture from "../components/Picture";
 import Information from "../components/Information";
 import Footer from "../components/Footer";
-import InformationMater from "../components/InformationMaster";
+import PopUp from "../components/PopUp";
+
 
 class DetailRoomPage extends Component {
   render() {
@@ -11,18 +12,18 @@ class DetailRoomPage extends Component {
 
     var dsphong = JSON.parse(data || "[]");
     var phongHienThi = dsphong[0];
-    
-    console.log(phongHienThi);
 
+    
     return (
       <div className="deTailRoom">
         <Menu></Menu>
         <Picture
           hinhAnhs={phongHienThi.hinhAnh}
           tieuDeDangBai={phongHienThi.tieuDeDangBai}
-        ></Picture>
+          ></Picture>
         <Information></Information>
         <Footer></Footer>
+        <PopUp></PopUp>
       </div>
     );
   }

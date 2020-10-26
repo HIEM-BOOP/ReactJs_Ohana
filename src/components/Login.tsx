@@ -9,6 +9,7 @@ class Login extends Component<Props, State> {
     this.state = {
       username: "hiemkbr",
       password: "hiem2001",
+      reset : "",
     };
   }
   render() {
@@ -39,6 +40,7 @@ class Login extends Component<Props, State> {
           id=""
         />
         <button onClick={this.onClickLogin}>login</button>
+        <button onClick={this.onClickReset}>Reset</button>
 
         <p>Tài khoản đăng nhập là: {this.state.username};</p>
 
@@ -57,7 +59,12 @@ class Login extends Component<Props, State> {
     let log = localStorage.setItem('taikhoan',(this.state.username));
     
   };
-  
+  onClickReset = () => {
+    this.setState({
+      username : "",
+      password : "",
+    })
+  }
   onChangeUsername = (newUsername: string) => {
     this.setState({
       username: newUsername,
@@ -69,6 +76,7 @@ type Props = {};
 type State = {
   username: string;
   password: string;
+  reset : string;
 };
 
 export default Login;
